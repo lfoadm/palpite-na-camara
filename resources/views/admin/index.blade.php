@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
     
 <div class="main-content-wrap">
@@ -49,7 +49,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <div class="wg-chart-default">
                     <div class="flex items-center justify-between">
@@ -248,5 +247,4 @@
 
     </div>
 </div>
-
 @endsection

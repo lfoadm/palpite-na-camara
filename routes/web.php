@@ -21,5 +21,6 @@ Route::middleware(['auth'])->group(function() {
 // #CONTA DO ADMINISTRADOR
 Route::middleware(['auth', AuthAdmin::class])->group(function() {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    //Route::resource('/admin/candidates', CandidateController::class)->names('admin.candidates');
     
 });
