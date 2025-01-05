@@ -27,7 +27,7 @@
             <div class="layout-wrap">
                 <div class="section-menu-left">
                     <div class="box-logo">
-                        <a href="{{-- route('admin.index') --}}" id="site-logo-inner">
+                        <a href="{{ route('home.index') }}" id="site-logo-inner">
                             <img class="" id="logo_header_1" alt="" src="{{ asset('images/logo/logo.png') }}" data-light="{{ asset('images/logo/logo.png') }}" data-dark="{{ asset('images/logo/logo.png') }}">
                         </a>
                         <div class="button-show-hide">
@@ -39,7 +39,7 @@
                             <div class="center-heading">Principal</div>
                             <ul class="menu-list">
                                 <li class="menu-item">
-                                    <a href="{{-- route('admin.index') --}}" class="">
+                                    <a href="{{ route('admin.index') }}" class="">
                                         <div class="icon"><i class="icon-grid"></i></div>
                                         <div class="text">Painel</div>
                                     </a>
@@ -48,6 +48,44 @@
                         </div>
                         <div class="center-item">
                             <ul class="menu-list">
+                                <li class="menu-item has-children">
+                                    <a href="javascript:void(0);" class="menu-item-button">
+                                        <div class="icon"><i class="icon-map"></i></div>
+                                        <div class="text">Cidades</div>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('admin.cities.create') }}" class="">
+                                                <div class="text">Nova Cidade</div>
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('admin.cities.index') }}" class="">
+                                                <div class="text">Cidades</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="menu-item has-children">
+                                    <a href="javascript:void(0);" class="menu-item-button">
+                                        <div class="icon"><i class="icon-flag"></i></div>
+                                        <div class="text">Partidos</div>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('admin.parties.create') }}" class="">
+                                                <div class="text">Nova Partido</div>
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('admin.parties.index') }}" class="">
+                                                <div class="text">Partidos</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                
                                 <li class="menu-item has-children">
                                     <a href="javascript:void(0);" class="menu-item-button">
                                         <div class="icon"><i class="icon-shopping-cart"></i></div>
@@ -66,43 +104,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="menu-item has-children">
-                                    <a href="javascript:void(0);" class="menu-item-button">
-                                        <div class="icon"><i class="icon-layers"></i></div>
-                                        <div class="text">Cidades</div>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li class="sub-menu-item">
-                                            <a href="{{-- route('admin.cities.create') --}}" class="">
-                                                <div class="text">Nova Cidade</div>
-                                            </a>
-                                        </li>
-                                        <li class="sub-menu-item">
-                                            <a href="{{-- route('admin.cities.index') --}}" class="">
-                                                <div class="text">Cidades</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item has-children">
-                                    <a href="javascript:void(0);" class="menu-item-button">
-                                        <div class="icon"><i class="icon-layers"></i></div>
-                                        <div class="text">Partido</div>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li class="sub-menu-item">
-                                            <a href="{{-- route('admin.parties.create') --}}" class="">
-                                                <div class="text">Nova Partido</div>
-                                            </a>
-                                        </li>
-                                        <li class="sub-menu-item">
-                                            <a href="{{-- route('admin.parties.index') --}}" class="">
-                                                <div class="text">Partidos</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
+                                
                                 <li class="menu-item has-children">
                                     <a href="javascript:void(0);" class="menu-item-button">
                                         <div class="icon"><i class="icon-file-plus"></i></div>
@@ -127,6 +129,15 @@
                                         <div class="text">Slides</div>
                                     </a>
                                 </li>
+                                <hr>
+                                <li class="menu-item">
+                                    <a href="{{ route('admin.account.index') }}" class="">
+                                        <div class="icon"><i class="icon-users"></i></div>
+                                        <div class="text">Usuários</div>
+                                    </a>
+                                </li>
+                                
+
                                 {{-- <li class="menu-item">
                                     <a href="#" class="">
                                         <div class="icon"><i class="icon-grid"></i></div>
@@ -169,7 +180,7 @@
                     <div class="header-dashboard">
                         <div class="wrap">
                             <div class="header-left">
-                                <a href="index-2.html">
+                                <a href="{{ route('home.index') }}">
                                     <img class="" id="logo_header_mobile" alt="" src="{{ asset('images/logo/logo.png') }}"
                                         data-light="{{ asset('images/logo/logo.png') }}" data-dark="{{ asset('images/logo/logo.png') }}"
                                         data-width="154px" data-height="52px" data-retina="{{ asset('images/logo/logo.png') }}">
@@ -381,7 +392,7 @@
                                             id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-user wg-user">
                                                 <span class="image">
-                                                    <img src="images/avatar/user-1.png" alt="">
+                                                    <img src="{{asset('images/avatar/user.png') }}" alt="">
                                                 </span>
                                                 <span class="flex flex-column">
                                                     <span class="body-title mb-2">{{ Auth::user()->name }}</span>
@@ -445,9 +456,9 @@
                             @yield('content')
                         </div>
 
-
+                        {{-- FOOTER --}}
                         <div class="bottom-page">
-                            <div class="body-text">Copyright © 2024 BetCand</div>
+                            <div class="body-text">Copyright © 2024 Palpite na Câmara</div>
                         </div>
                     </div>
 

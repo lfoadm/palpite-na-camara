@@ -1893,7 +1893,7 @@ a:hover, a:focus {
   display: -webkit-flex;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   gap: 20px;
 }
 .list-icon-function .item {
@@ -1907,7 +1907,7 @@ a:hover, a:focus {
   color: #22C55E;
 }
 .list-icon-function .item.trash {
-  color: #FF5200;
+  color: #ff0d00;
 }
 
 .wg-order-detail {
