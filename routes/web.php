@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CandidateController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\PartyController;
 use App\Http\Controllers\HomeController;
@@ -26,7 +27,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function() {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('/admin/cities', CityController::class)->names('admin.cities');
     Route::resource('/admin/parties', PartyController::class)->names('admin.parties');
-    //Route::resource('/admin/candidates', CandidateController::class)->names('admin.candidates');
+    Route::resource('/admin/candidates', CandidateController::class)->names('admin.candidates');
     
 
     #CONTAS DE USUÁRIOS

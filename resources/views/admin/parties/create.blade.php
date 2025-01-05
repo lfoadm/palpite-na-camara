@@ -98,9 +98,21 @@
 
         function StringToSlug(Text)
         {
-            return Text.toLowerCase()
-            .replace(/[^\w ]+/g, "")
-            .replace(/ +/g,"-");
+            const map = {
+            "ã": "a", "á": "a", "à": "a", "ä": "a", "â": "a",
+            "é": "e", "è": "e", "ë": "e", "ê": "e",
+            "í": "i", "ì": "i", "ï": "i", "î": "i",
+            "õ": "o", "ó": "o", "ò": "o", "ö": "o", "ô": "o",
+            "ú": "u", "ù": "u", "ü": "u", "û": "u",
+            "ç": "c", "ñ": "n",
+            "ý": "y", "ÿ": "y",
+        };
+
+        return Text.toLowerCase()
+            .replace(/[^\w ]+/g, function (char) {
+                return map[char] || "";
+            }) // Substitui caracteres especiais pelo mapeamento
+            .replace(/ +/g, "-"); // Substitui espaços por hífen
         }
     </script>
 @endpush

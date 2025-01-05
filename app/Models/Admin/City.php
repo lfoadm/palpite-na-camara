@@ -11,8 +11,8 @@ class City extends Model
     use HasFactory;
     protected $fillable = ['name', 'slug', 'quantity', 'image'];
 
-    // public function candidates()
-    // {
-    //     return $this->hasMany(Candidate::class);
-    // }
+    public function candidates()
+    {
+        return $this->hasMany(Candidate::class);
+    }
 }

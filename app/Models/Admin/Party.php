@@ -9,4 +9,10 @@ class Party extends Model
 {
     /** @use HasFactory<\Database\Factories\Admin\PartyFactory> */
     use HasFactory;
+    protected $fillable = ['name', 'slug', 'acronym', 'number', 'image'];
+
+    public function candidates()
+    {
+        return $this->hasMany(Candidate::class);
+    }
 }

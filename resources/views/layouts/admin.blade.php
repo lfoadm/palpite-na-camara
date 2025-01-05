@@ -93,12 +93,12 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="{{-- route('admin.candidates.create') --}}" class="">
+                                            <a href="{{ route('admin.candidates.create') }}" class="">
                                                 <div class="text">Adicionar Candidato</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="{{-- route('admin.candidates.index') --}}" class="">
+                                            <a href="{{ route('admin.candidates.index') }}" class="">
                                                 <div class="text">Candidato</div>
                                             </a>
                                         </li>
