@@ -123,13 +123,13 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <hr>
                                 <li class="menu-item">
-                                    <a href="{{-- route('admin.slides.index') --}}" class="">
+                                    <a href="{{ route('admin.slides.index') }}" class="">
                                         <div class="icon"><i class="icon-image"></i></div>
                                         <div class="text">Slides</div>
                                     </a>
                                 </li>
-                                <hr>
                                 <li class="menu-item">
                                     <a href="{{ route('admin.account.index') }}" class="">
                                         <div class="icon"><i class="icon-users"></i></div>
@@ -164,7 +164,7 @@
                                         @csrf
                                         <a href="{{ route('logout') }}" class="" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                             <div class="icon">
-                                                <i class="icon-settings"></i>
+                                                <i class="icon-share"></i>
                                             </div>
                                             
                                             <div class="text">Sair</div>

@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin\City;
+use App\Models\Admin\Slide;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        // $slides = Slide::where('status', 1)->get()->take(3);
+        $slides = Slide::where('status', 1)->get()->take(3);
+        $cities = City::orderBy('name', 'ASC')->get();
+
         // $orders = Order::orderBy('created_at', 'DESC')->get();
         
         // $orderItems = OrderItem::with(['candidate' => function($query) {
@@ -23,7 +27,8 @@ class HomeController extends Controller
         //     ];
         // });
         
-        return view('index');
+        
+        return view('index', compact('cities', 'slides'));
     }
 
     // public function show($order_id)
