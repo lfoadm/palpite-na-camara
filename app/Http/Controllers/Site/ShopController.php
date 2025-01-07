@@ -15,7 +15,21 @@ class ShopController extends Controller
         // Recuperar a cidade pelo slug
         $city = City::where('slug', $city_slug)->firstOrFail();
 
-        //dd($city->id);
+        // Recuperar a quantidade da cidade associada ao primeiro item no carrinho
+        $items = session('cart', []); // Recuperar os itens do carrinho
+        $quantity = null; // Inicializa a variável quantity
+        if (count($items) > 0) {
+            // Supondo que o carrinho armazene o 'city_id' ou outro identificador para a cidade
+            $first_item_city_id = $items[0]['city_id']; // Altere 'city_id' conforme sua estrutura de carrinho
+    
+            // Recuperar a quantidade da cidade do primeiro item do carrinho
+            $city_from_cart = City::find($first_item_city_id); // Buscar a cidade pelo ID
+    
+            if ($city_from_cart) {
+                $quantity = $city_from_cart->quantity; // Atribuir a quantidade
+            }
+        }
+
         // Filtrar os partidos que possuem candidatos na cidade
         $parties = Party::whereHas('candidates', function ($query) use ($city) {
             $query->where('city_id', $city->id);
@@ -57,6 +71,10 @@ class ShopController extends Controller
             $query->whereIn('party_id', explode(',', $f_parties))->orWhereRaw("'".$f_parties."'=''");
         })->orderBy($o_column, $o_order)->paginate($size);
 
-        return view('site.shop.index', compact('city', 'candidates', 'size', 'order', 'cities', 'f_cities', 'parties', 'f_parties', 'min_price', 'max_price'));
+        $data = ['cart' => $items];
+
+        // dd($quantity);
+
+        return view('site.shop.index', $data, compact('city', 'candidates', 'size', 'order', 'cities', 'f_cities', 'parties', 'f_parties', 'min_price', 'max_price',  'quantity'));
     }
 }

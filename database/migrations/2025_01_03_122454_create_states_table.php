@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('states', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->integer('quantity'); // Nº de candidatos eleitos nessa cidade
-            $table->string('image')->nullable();
-            $table->foreignId('state_id')->constrained()->onDelete('cascade');
+            $table->string('name'); // Nome do estado
+            $table->string('abbreviation', 2); // Abreviação (2 caracteres)
+            $table->string('country')->default('Brasil'); // Nome do país
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists('states');
     }
 };

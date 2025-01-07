@@ -7,17 +7,29 @@ use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\PartyController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Site\CartController;
 use App\Http\Controllers\Site\ShopController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-
+#AUTENTICAÇÃO
 Auth::routes();
 
+#SITE ABERTO / SEM MIDDLEWARE
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
+#LADO SHOP
+Route::get('/shop/city/{city_slug}', [ShopController::class, 'city_index'])->name('shop.city.index');
+
+// #CARRINHO DE COMPRAS
+Route::post('/cart/add/{candidateId}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
+// Route::put('/cart/increase-quantity/{rowId}', [CartController::class, 'increase_cart_quantity'])->name('cart.qty.increase');
+// Route::put('/cart/decrease-quantity/{rowId}', [CartController::class, 'decrease_cart_quantity'])->name('cart.qty.decrease');
+Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove_item'])->name('cart.item.remove');
+Route::delete('/cart/remove', [CartController::class, 'empty_cart'])->name('cart.empty');
 
 // #CONTA DO USUÁRIO FINAL (CONSUMIDOR)
 Route::middleware(['auth'])->group(function() {
@@ -33,10 +45,8 @@ Route::middleware(['auth', AuthAdmin::class])->group(function() {
     Route::resource('/admin/candidates', CandidateController::class)->names('admin.candidates');
     Route::resource('/admin/slides', SlideController::class)->names('admin.slides');
 
-    #LADO SHOP
-    Route::get('/shop/city/{city_slug}', [ShopController::class, 'city_index'])->name('shop.city.index');
     
-
+    
     #CONTAS DE USUÁRIOS
     Route::resource('/admin/users', AccountController::class)->names('admin.account');    
 });

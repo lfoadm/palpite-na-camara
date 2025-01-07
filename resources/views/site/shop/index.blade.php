@@ -78,9 +78,11 @@
                                             <input type="checkbox" class="chk-party" name="parties" value="{{ $party->id }}"
                                                 @if(in_array($party->id, explode(',', $f_parties))) checked="checked" @endif
                                             />
-                                            {{ $party->name }}
+                                            {{ $party->acronym }}
                                         </span>
-                                        <span class="text-right float-end">{{ $party->candidates->count() }}</span>
+                                        <span class="text-right float-end">{{ $party->candidates->filter(function ($candidate) use ($city) {
+                                            return $candidate->city_id === $city->id;
+                                        })->count() }}</span>
                                     </li>
                                 @endforeach
                             </ul>
@@ -92,6 +94,11 @@
 
         <div class="shop-list flex-grow-1">
             <div class="mb-3 pb-2 pb-xl-3"></div>
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    <h2>{{ session('error') }}</h2>
+                </div>
+            @endif
             <div class="d-flex justify-content-between mb-4 pb-md-2">
                 <div class="breadcrumb mb-0 d-none d-md-block flex-grow-1">
                     <a href="{{ route('home.index') }}" class="menu-link menu-link_us-s text-uppercase fw-medium">Início</a>
@@ -138,10 +145,17 @@
                     </div>
                 </div>
             </div>
+            
+            @php
+                $cartCollection = collect($cart);
+            @endphp
 
-            @if(!$cities)
-            <h1>você atingiu a quantidade maxima</h1>
-            <a type="button" class="btn btn-success" href="#" class="navigation__link">Ir para o resumo do bilhete</a>
+            @if($city->candidates->count() === 0)
+                <h1>Cidade não possui candidatos ainda!</h1>
+                <a type="button" class="btn btn-info" href="{{ route('home.index') }}" class="navigation__link">Voltar</a>
+            @elseif (isset($quantity) && $cartCollection->count() >= $quantity)
+                <h2>Você atingiu a quantidade máxima de candidatos nessa cidade.</h2>
+                <a type="button" class="btn btn-success" href="{{ route('cart.show') }}" class="navigation__link">Ir para o resumo do bilhete</a>
             @else
             <div class="products-grid row row-cols-2 row-cols-md-3" id="products-grid">
                 @foreach($candidates as $candidate)
@@ -164,21 +178,19 @@
                                         <use href="#icon_next_sm" />
                                     </svg></span>
                             </div>
-                            {{-- @if(Cart::instance('cart')->content()->where('id', $candidate->id)->count()>0)
-                                <a href="{{ route('cart.index') }}" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-warning mb-3">Ir para o bilhete</a>
-                            @else --}}
-                                <form name="addtocart-form" method="post" action="{{-- route('cart.add') --}}" id="myForm" class="submitForm">
+
+                            @php
+                                $cartCollection = collect($cart);
+                            @endphp
+
+                            @if($cartCollection->contains('id', $candidate->id))
+                                <a href="{{ route('cart.show') }}" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-warning mb-3">Ir para o bilhete</a>
+                            @else
+                                <form name="addtocart-form" method="post" action="{{ route('cart.add', ['candidateId' => $candidate->id]) }}" id="myForm" class="submitForm">
                                     @csrf
-                                    <input type="hidden" name="id" value="{{ $candidate->id }}" />
-                                    <input type="hidden" name="quantity" value="1" />
-                                    <input type="hidden" name="name" value="{{ $candidate->short_name }}" />
-                                    <input type="hidden" name="price" value="{{ $candidate->sale_price == '' ? $candidate->regular_price : $candidate->sale_price }}" />
-                                    <input type="hidden" name="number" value="{{ $candidate->number }}" />
-                                    <input type="hidden" name="party_id" value="{{ $candidate->party->name }}" />
-                                    <input type="hidden" name="short_name" value="{{ $candidate->short_name }}" />
                                     <button type="submit" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium" data-aside="cartDrawer" title="Add To Cart">Adicionar ao bilhete</button>
                                 </form>
-                            {{-- @endif --}}
+                            @endif
                         </div>
 
                         <div class="pc__info position-relative">
