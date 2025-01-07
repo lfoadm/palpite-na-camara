@@ -9,4 +9,9 @@ class State extends Model
 {
     /** @use HasFactory<\Database\Factories\Admin\StateFactory> */
     use HasFactory;
+
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
 }

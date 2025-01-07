@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Admin\Candidate;
 use App\Models\Admin\City;
 use App\Models\Admin\Party;
+use App\Models\Admin\Slide;
 use App\Models\Admin\State;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -60,28 +61,28 @@ class DatabaseSeeder extends Seeder
             'name' => 'ITURAMA',
             'slug' => 'iturama',
             'state_id' => 12,
-            'quantity' => 15,
+            'quantity' => 3,
             'image' => '1735924480.jpg',
         ]);
         City::factory()->create([
             'name' => 'CAMPINA VERDE',
             'slug' => 'campina-verde',
             'state_id' => 12,
-            'quantity' => 11,
+            'quantity' => 3,
             'image' => '1735928376.jpg',
         ]);
         City::factory()->create([
             'name' => 'CARNEIRINHO',
             'slug' => 'carneirinho',
             'state_id' => 12,
-            'quantity' => 9,
+            'quantity' => 2,
             'image' => '1735924658.jpg',
         ]);
         City::factory()->create([
             'name' => 'OUROESTE',
             'slug' => 'ouroeste',
             'state_id' => 25,
-            'quantity' => 9,
+            'quantity' => 3,
             'image' => '1735928378.jpg',
         ]);
 
@@ -103,6 +104,32 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@user.com',
             'mobile' => '17997249344',
             'utype' => 'USR',
+        ]);
+
+        //SLIDES
+        Slide::factory()->create([
+            'tagline' => 'SORTE',
+            'title' => 'Acerte os eleitos,',
+            'subtitle' => 'conquiste a vitória!',
+            'link' => 'http://127.0.0.1:8000',
+            'image' => '1736269188.jpg',
+            'status' => 1,
+        ]);
+        Slide::factory()->create([
+            'tagline' => 'ACERTE',
+            'title' => 'Seu palpite,',
+            'subtitle' => 'sua chance de vencer!',
+            'link' => 'http://127.0.0.1:8000',
+            'image' => '1736269269.jpg',
+            'status' => 1,
+        ]);
+        Slide::factory()->create([
+            'tagline' => 'TORCIDA',
+            'title' => 'Palpite na Câmara:',
+            'subtitle' => 'diversão e desafio eleitoral!',
+            'link' => 'http://127.0.0.1:8000',
+            'image' => '1736269693.jpg',
+            'status' => 1,
         ]);
 
         // PARTIDOS

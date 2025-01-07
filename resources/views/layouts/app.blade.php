@@ -491,15 +491,17 @@
           </div>
           @endguest
 
-          <a href="wishlist.html" class="header-tools__item">
+          {{-- <a href="wishlist.html" class="header-tools__item">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <use href="#icon_heart" />
             </svg>
-          </a>
+          </a> --}}
 
           <a href="{{ route('cart.show') }}" class="header-tools__item header-tools__cart">
             <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_cart" /></svg>
-            <span class="cart-amount d-block position-absolute js-cart-items-count">{{-- @if($cart){{ count($cart) }}@endif--}}</span>
+            @if(!empty($cart))
+              <span class="cart-amount d-block position-absolute js-cart-items-count">{{ count($cart) }}</span>
+            @endif
           </a>
         </div>
       </div>

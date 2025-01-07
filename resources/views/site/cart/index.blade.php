@@ -14,7 +14,7 @@
         @if(!$city)
             <h2 class="mb-6 pb-4">SEU BILHETE ESTÁ VAZIO</h2>
         @else
-            <h2 class="page-title">Resumo bilhete da cidade:  {{ $city->name }}</h2>  
+            <h2 class="page-title">Resumo bilhete da cidade:  {{ $city->name }}/{{ $city->state->abbreviation }}</h2>  
         @endif
         <div class="checkout-steps">
             <a href="javascript:void(0)" class="checkout-steps__item active">
@@ -35,7 +35,7 @@
                 <span class="checkout-steps__item-number">03</span>
                 <span class="checkout-steps__item-title">
                     <span>Confirmação</span>
-                    <em>Revise e envie seu palpite</em>
+                    <em>Pedido confirmado</em>
                 </span>
             </a>
         </div>
@@ -89,7 +89,6 @@
                         </tbody>
                     </table>
                     <div class="text-center">
-
                         <p>Total selecionados: </p><strong>{{ count($cart) }} de {{ $city->quantity }}</strong> 
                     </div>
                     <div class="cart-table-footer">
@@ -112,48 +111,14 @@
                     <div class="sticky-content">
                         <div class="shopping-cart__totals">
                             <h3>Valor total do Bilhete</h3>
-                            @if (Session::has('discounts'))
-
-                            <table class="cart-totals">
-                                <tbody>
-                                    <tr>
-                                        <th>Subtotal</th>
-                                        <td>R${{ Cart::instance('cart')->subtotal() }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Desconto {{ Session::get('coupon')['code'] }}</th>
-                                        <td>R${{ Session::get('discounts')['discount'] }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Subtotal com desconto</th>
-                                        <td>R${{ Session::get('discounts')['subtotal'] }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Frete</th>
-                                        <td>Free</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Impostos</th>
-                                        <td>R${{ Session::get('discounts')['tax'] }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Total</th>
-                                        <td>R${{ Session::get('discounts')['total'] }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            @else
-                            
                             <table class="cart-totals">
                                 <tbody>
                                     <tr>
                                         <th>Total</th>
-                                        <td>R$ 20,00</td>
+                                        <td>R$ 30,00</td>
                                     </tr>
                                 </tbody>
                             </table>
-                            @endif
                         </div>
                         <div class="mobile_fixed-btn_wrapper">
                             <div class="button-wrapper container">
@@ -165,7 +130,7 @@
                                     <p >Quantidade dever ser igual a {{ $city->quantity }}</p>
                                     <h3>Exclua itens do seu bilhete!</h3>
                                 @else
-                                    <a href="{{ route('shop.city.index', ['city_slug' => $city->slug]) }}" class="btn btn-primary btn-checkout">Continuar a compra</a>
+                                    <a href="{{ route('cart.checkout') }}" class="btn btn-primary btn-checkout">Avançar para pagamento</a>
                                 @endif
                             </div>
                         </div>
